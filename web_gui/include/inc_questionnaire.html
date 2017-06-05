@@ -1,0 +1,61 @@
+<link rel="stylesheet" type="text/css" href="style.css" media="screen">
+
+<form name="input_questionnaire" action="questionnaire.php" method="post">
+    
+    <h2> Answer the following questions based on you Network needs: </h2> 
+    
+    <p> Topology Name: <input type="text" name="name_topology" /></p>
+    <p> Description: <input type="text" name="description_topology" /></p>
+
+    
+    <p> Number of Deparments: <input type="text" id="number_departments" 
+                                     name="number_vlan" onchange =' myFunction()' /></p>
+    
+   
+    <div id="mainScreen" style="display: block">
+        <table id="tabledepartment" align="center">
+            <tr><th>Department Name</th> <th>No of Hosts</th> <th>IP Range</th></tr>
+            <tr><td> <input id="name" name="dptName_0" type="text"/></td>
+                <td><input id="ip" name="noHost_0" type="text" /></td>
+                <td> <input type="button" name="botonVlan" id="addRow" onclick="newRow()" 
+                            value="Add Department"/></td></tr>
+       </table>
+    </div>
+
+   
+    
+    <h3> Additional Services </h3>
+    <p> SSH <input type="checkbox" name="ssh" value="SSH" /></p>
+    <p> Telnet <input type="checkbox" name="telnet" value="Telnet" /></p>
+    <p> Web Server <input type="checkbox" name="http" value="Web Server" /></p>
+    <p> FTP Server <input type="checkbox" name="ftp" value="FTP Server"/></p>
+    <p> IM Server <input type="checkbox" name="imServer"  value="IM Server"/></p>
+    <p> Mail Server <input type="checkbox" name="mail" value="Mail Server"/></p>
+        
+    <button name="submit_topology"> Create Network Topology </button>
+    
+</form> 
+
+
+ <script type="text/javascript">
+        var i = 1;
+        var NameValue;
+        function newRow(){
+            if (i < (NameValue)){
+               
+                var node = document.createElement("div");
+                node.innerHTML = '<table align="center"><tr><td><input name="dptName_'+i+'" type="text"/></td> \n\
+                <td><input name="noHost_'+i+'" type="text" /></td>\n\
+                <td/><input type="button" style ="visibility: hidden" name="botonVlan" id="addRow" \n\
+                onclick="addRow()" value="New Department"/></td></tr></table>';
+                document.getElementById("mainScreen").appendChild(node);
+                i++;
+            }
+        }  
+        
+        function myFunction(){
+            NameValue = document.forms["input_questionnaire"]["number_departments"].value;
+      
+        }
+</script>
+
